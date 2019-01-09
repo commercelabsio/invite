@@ -79,8 +79,8 @@ class InviteConfig extends ConfigFormBase {
     $form['accept_redirect'] = [
       '#type' => 'textfield',
       '#required' => FALSE,
-      '#title' => t('Accept Redirect'),
-      '#description' => t('The route the user will be redirected to when registering. Defaults to "user.register"'),
+      '#title' => $this->t('Accept Redirect'),
+      '#description' => $this->t('The route the user will be redirected to when registering. Defaults to "user.register"'),
       '#default_value' => $config->get('accept_redirect'),
     ];
 
@@ -98,7 +98,7 @@ class InviteConfig extends ConfigFormBase {
     $route_exists = count($this->routeProvider->getRoutesByNames([$route_name])) === 1;
 
     if (!$route_exists) {
-      $form_state->setErrorByName('accept_redirect', t('Route "@route" does not exist.', ['@route' => $route_name]));
+      $form_state->setErrorByName('accept_redirect', $this->t('Route "@route" does not exist.', ['@route' => $route_name]));
     }
   }
 
