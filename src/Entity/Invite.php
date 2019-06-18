@@ -41,7 +41,7 @@ use Drupal\user\UserInterface;
  *     "id" = "id",
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
- *     "test" = "test",
+ *     "reg_code" = "reg_code",
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/invite/{invite}",

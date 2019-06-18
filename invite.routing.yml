@@ -1,3 +1,11 @@
+invite.invite_accept_form:
+  path: '/invite/accept'
+  defaults:
+    _form: '\Drupal\invite\Form\InviteAcceptForm'
+    _title: 'InviteAcceptForm'
+  requirements:
+    _permission: 'access content'
+
 invite.invite_accept_accept:
   path: '/invite/accept/{invite}'
   defaults:
@@ -54,3 +62,5 @@ invite.invite_resend_form:
     _title: 'Resend Invite'
   requirements:
     _custom_access: '\Drupal\invite\Controller\InviteAccessController::resendInviteAccess'
+
+
