@@ -70,10 +70,13 @@ class InviteList extends ControllerBase {
     $query = $this->database->select('invite', 'i');
     $query->fields('ufd', ['mail']);
     $query->fields('i', ['id', 'status']);
-    $query->fields('ie', ['field_invite_email_address_value']);
+    $moduleHandler = \Drupal::service('module_handler');
     $query->leftJoin('users', 'u', 'i.user_id = u.uid');
     $query->leftJoin('users_field_data', 'ufd', 'u.uid = ufd.uid');
-    $query->leftJoin('invite__field_invite_email_address', 'ie', 'i.id = ie.entity_id');
+    if ($moduleHandler->moduleExists('invite_by_email')){
+      $query->fields('ie', ['field_invite_email_address_value']);
+      $query->leftJoin('invite__field_invite_email_address', 'ie', 'i.id = ie.entity_id');
+    }
     $query->orderBy('i.id', 'desc');
 
     $query = $query->extend('Drupal\Core\Database\Query\PagerSelectExtender');
