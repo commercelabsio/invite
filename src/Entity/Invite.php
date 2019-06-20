@@ -42,6 +42,7 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
  *     "reg_code" = "reg_code",
+ *     "bundle" = "type",
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/invite/{invite}",
