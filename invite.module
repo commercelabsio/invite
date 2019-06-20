@@ -56,7 +56,7 @@ function invite_help($route_name, RouteMatchInterface $route_match) {
     case 'help.page.invite':
       $output = '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('Invite is an invitation system that lets you and your site members invite more people to join the site. Invitations are important to encourage expansion of your network and to provide an exponential growth of community interest. This project provides an “Invite a Friend” feature that allows your users to send and track invitations.') . '</p>';
-      $output = '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
       $output .= '<p>' . t('The configuration can be accessed in <i>Structure</i>  » <i>Invite types</i>.') . '</p>';
       $output .= '<p>' . t('Enable the invite and invite_by_email.') . '</p>';
       $output .= '<p>' . t('Navigate <i>Structure</i> » <i>Invite types</i> » Add Invite type and add an invite type.') . '</p>';
