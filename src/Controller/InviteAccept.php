@@ -58,7 +58,7 @@ class InviteAccept extends ControllerBase {
     $type = 'status';
 
     // Current user is the inviter.
-    if ($account->id() == $invite->getOwnerId()) {
+    if ($invite->getOwnerId() != 0 && $account->id() == $invite->getOwnerId()) {
       $message = $this->t("You can't use your own invite.");
       $type = 'error';
     }
