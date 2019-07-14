@@ -54,7 +54,6 @@ class InviteAccept extends ControllerBase {
   public function accept($invite) {
     $account = $this->currentUser();
     $redirect = '<front>';
-    $message = 'Hmm.';
     $type = 'status';
 
     // Current user is the inviter.
@@ -82,7 +81,15 @@ class InviteAccept extends ControllerBase {
       $invite->save();
     }
 
-    // Good to go!
+    // The User is already logged in and its not their own invite.
+    elseif (!$account->isAnonymous()) {
+      $invite->setJoined(\Drupal::time()->getRequestTime());
+      $invite->setStatus(InviteConstants::INVITE_USED);
+      $invite->setInvitee($account);
+      $invite->save();
+    }
+
+    // User needs to register
     else {
       $_SESSION['invite_code'] = $invite->getRegCode();
       $redirect = 'user.register';

@@ -7,13 +7,13 @@
 
 use Drupal\invite\InviteConstants;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\user\Entity\User;
 use Drupal\invite\Entity\Invite;
+use Drupal\user\UserInterface;
 
 /**
- * Implements hook_user_presave().
+ * Implements hook_user_insert().
  */
-function invite_user_presave(User $account) {
+function invite_user_insert(UserInterface $account) {
   if (!empty($_SESSION['invite_code'])) {
     // Update invite when user accepts.
     $id = Drupal::entityQuery('invite')
@@ -22,29 +22,36 @@ function invite_user_presave(User $account) {
     $invite = Invite::load(reset($id));
     $invite->setJoined(\Drupal::time()->getRequestTime());
     $invite->setStatus(InviteConstants::INVITE_USED);
+    $invite->setInvitee($account);
     $invite->save();
-    // Add target role to user.
+    unset($_SESSION['invite_code']);
     $data = unserialize(\Drupal::config('invite.invite_type.' . $invite->get('type')->value)->get('data'));
     if ($data['target_role'] != '0') {
       $account->addRole($data['target_role']);
     }
-    $account->activate();
   }
 }
 
 /**
- * Implements hook_user_insert().
+ * Implements hook_user_login().
  */
-function invite_user_insert(User $account) {
+function invite_user_login(UserInterface $account) {
   if (!empty($_SESSION['invite_code'])) {
     // Update invite when user accepts.
     $id = Drupal::entityQuery('invite')
       ->condition('reg_code', $_SESSION['invite_code'])
       ->execute();
     $invite = Invite::load(reset($id));
+    $invite->setJoined(\Drupal::time()->getRequestTime());
+    $invite->setStatus(InviteConstants::INVITE_USED);
     $invite->setInvitee($account);
     $invite->save();
     unset($_SESSION['invite_code']);
+    $data = unserialize(\Drupal::config('invite.invite_type.' . $invite->get('type')->value)->get('data'));
+    if ($data['target_role'] != '0') {
+      $account->addRole($data['target_role']);
+    }
+
   }
 }
 
