@@ -7,6 +7,7 @@ use Drupal\invite\InviteConstants;
 use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\invite\InviteAcceptEvent;
+use Drupal\invite\InviteInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -51,7 +52,7 @@ class InviteAccept extends ControllerBase {
   /**
    * Accepts an invitation.
    */
-  public function accept($invite) {
+  public function accept(InviteInterface $invite) {
     $account = $this->currentUser();
     $redirect = '<front>';
     $type = 'status';

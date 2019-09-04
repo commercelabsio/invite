@@ -79,6 +79,15 @@ class InviteAcceptForm extends FormBase {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    if (!$this->invite_storage->loadByProperties(['reg_code' => $form_state->getValue('reg_code')])) {
+      $form_state->setErrorByName('reg_code', $this->t('This is not a valid code.'));
+    }
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
