@@ -9,6 +9,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\invite\InviteInterface;
 use Drupal\user\UserInterface;
 
@@ -185,7 +186,7 @@ class Invite extends ContentEntityBase implements InviteInterface {
   /**
    * {@inheritdoc}
    */
-  public function setInvitee(UserInterface $account) {
+  public function setInvitee(AccountInterface $account) {
     $this->set('invitee', $account->id());
     return $this;
   }
