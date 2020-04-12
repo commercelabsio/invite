@@ -100,7 +100,7 @@ class InviteResendForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var \Drupal\invite\InviteInterface $invite */
     $invite = $this->inviteStorage;
-    $invite_by_email = new InviteByEmail($this->messenger);
+    $invite_by_email = new InviteByEmail([], 0, 0, $this->messenger);
     $invite_by_email->send($invite);
 
     // Set invite status to active, if it was withdrawn or any other status.
