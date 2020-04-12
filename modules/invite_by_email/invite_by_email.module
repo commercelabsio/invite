@@ -134,18 +134,3 @@ function invite_by_email_load_from_session() {
     return [];
   }
 }
-
-/**
- * Implements hook_form_FORMID_alter().
- */
-function invite_by_email_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
-  /** @var \Drupal\invite\InviteInterface $invite_object */
-  $invite = invite_by_email_load_from_session();
-
-  $invite_object = current($invite);
-  if ($invite_object) {
-    $form['account']['mail']['#default_value'] = $invite_object->field_invite_email_address->value;
-    $form['account']['mail']['#disabled'] = TRUE;
-  }
-}
