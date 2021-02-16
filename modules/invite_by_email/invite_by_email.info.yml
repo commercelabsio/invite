@@ -3,6 +3,6 @@ type: module
 description: Allow users to invite others to the site by sending the invitation by email.
 core: 8.x
 package: Invite
-
+core_version_requirement: ^8 || ^9
 dependencies:
   - invite:invite
