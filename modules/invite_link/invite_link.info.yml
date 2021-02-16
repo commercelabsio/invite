@@ -3,6 +3,6 @@ type: module
 description: Allow users to invite others to the site by generating an invitation link.
 core: 8.x
 package: Invite
-
+core_version_requirement: ^8 || ^9
 dependencies:
   - invite:invite
