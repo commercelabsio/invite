@@ -2,7 +2,7 @@
 
 namespace Drupal\invite;
 
-use Symfony\Contracts\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Invite Accept class.
